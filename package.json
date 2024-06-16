@@ -1,21 +1,24 @@
 {
   "name": "binance-signal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@aws-sdk/client-sts": "^3.598.0",
+    "@types/node": "^20.14.2",
     "nodemon": "^3.0.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.598.0",
     "binance": "^2.8.14",
-    "danfojs-node": "^1.1.2",
+    "dotenv": "^16.4.5",
     "eventemitter2": "^6.4.9"
   },
   "scripts": {
     "build": "tsc",
-    "start": "pm2 start ./dist/main.js",
-    "start:dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/main.ts"
+    "start": "NODE_ENV=production pm2 start ./dist/main.js",
+    "start:dev": "nodemon --watch 'src/**/*.ts' --exec NODE_ENV=development AWS_PROFILE=crypto-watcher-local ts-node src/main.ts"
   }
 }

@@ -11,6 +11,13 @@ const DEFAULT_OPTIONS = {
   lookBackLength: 3,
 };
 
+export type SurgeDetectedEvent = {
+  ticker: string;
+  timestamp: number;
+  price: number;
+  rate: number;
+};
+
 export class Watcher extends EventEmitter2 {
   private _tickerMap: Map<string, FixedSizeArray<number>>;
   private _priceChangeRateToWatch: number;

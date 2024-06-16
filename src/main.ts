@@ -1,5 +1,6 @@
 import { WebsocketClient, WsMessageKlineFormatted, USDMClient } from "binance";
 import { Watcher } from "./watcher";
+import { putSignalToDB } from "./uploader";
 
 const wsClient = new WebsocketClient({
   beautify: true,
@@ -59,6 +60,8 @@ async function main() {
         rate * 100
       ).toFixed(2)}%`
     );
+
+    putSignalToDB({ ticker: symbol, price, rate, timestamp });
   });
 
   tickerList.forEach((symbol) => {
